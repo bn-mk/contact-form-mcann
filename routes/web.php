@@ -29,6 +29,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('submissions', [ContactController::class, 'index'])->middleware(['auth', 'verified'])->name('submissions');
 Route::get('contact-us', [ContactController::class, 'show']);
 Route::post('contact-us', [ContactController::class, 'store'])->name('contact-submit');
 
