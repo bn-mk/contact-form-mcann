@@ -15,12 +15,11 @@ class DatabaseFormHandler implements ContactFormInterface
     // handle the databse implemetation of the contact form.
     public function submission(array $form_data): void
     {
-        // these form values are required but just in case we'll have some defaults
-        $name = $form_data['name'] ?? 'No name submitted';
-        $email = $form_data['email'] ?? 'No email submitted';
-        $comment = $form_data['comment'] ?? 'No comment submitted';
-
         try {
+            // these form values are required but just in case we'll have some defaults
+            $name = $form_data['name'] ?? 'No name submitted';
+            $email = $form_data['email'] ?? 'No email submitted';
+            $comment = $form_data['comment'] ?? 'No comment submitted';
             Contact::create(compact('name', 'email', 'comment'));
         } catch (QueryException | Exception $e) {
             Log::warning('Comment failed to save', [
@@ -32,7 +31,7 @@ class DatabaseFormHandler implements ContactFormInterface
 
     public function transformName(string $name): string
     {
-        return Str::ucfirst($name);
+        return Str::title($name);
     }
 
     public function transformEmail(string $email): string

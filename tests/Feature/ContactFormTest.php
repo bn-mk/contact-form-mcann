@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -26,5 +25,21 @@ class ContactFormTest extends TestCase
         ]);
 
         $response->assertRedirect('contact-success');
+        $this->assertDatabaseHas('contacts', [
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'comment' => 'This is a test comment'
+        ]);
+    }
+
+    public function test_users_cant_submit_bad_data()
+    {
+        $response = $this->post('/contact-us', [
+            'name' => 'Test User',
+            'email' => 'test',
+            'comment' => ''
+        ]);
+
+        $response->assertSessionHasErrors();
     }
 }
