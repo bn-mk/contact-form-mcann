@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Interfaces\ContactFormInterface;
+use Inertia\Inertia;
 
 class ContactController extends Controller
 {
@@ -12,11 +13,12 @@ class ContactController extends Controller
         /**
          * @var DatabaseFormHandler $form
          */
-        return view('contact-form');
+        return Inertia::render('ContactForm');
     }
 
     public function store(ContactRequest $request, ContactFormInterface $form)
     {
         $validated_form_data = $request->validated();
+        dd($request->all());
     }
 }
