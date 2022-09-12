@@ -39,6 +39,6 @@ class ContactController extends Controller
          */
         $form->submission($validated_form_data);
 
-        return redirect('submissions');
+        return redirect()->route('contact-success');
     }
 }
