@@ -19,6 +19,8 @@ class ContactController extends Controller
     public function store(ContactRequest $request, ContactFormInterface $form)
     {
         $validated_form_data = $request->validated();
-        dd($request->all());
+        $form->submission($validated_form_data);
+
+        return redirect('dashboard');
     }
 }
