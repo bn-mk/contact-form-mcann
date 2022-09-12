@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,5 +28,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('submissions', [ContactController::class, 'index'])->middleware(['auth', 'verified'])->name('submissions');
+Route::get('contact-us', [ContactController::class, 'show'])->name('contact-form');
+Route::post('contact-us', [ContactController::class, 'store'])->name('contact-submit');
+
+Route::get('contact-success', function () {
+    return Inertia::render('ContactSuccess');
+})->name('contact-success');
 
 require __DIR__.'/auth.php';

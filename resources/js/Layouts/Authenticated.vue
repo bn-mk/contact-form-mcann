@@ -53,6 +53,9 @@ const showingNavigationDropdown = ref(false);
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </BreezeDropdownLink>
+                                        <BreezeDropdownLink :href="route('submissions')" method="get" as="button">
+                                            Submissions
+                                        </BreezeDropdownLink>
                                     </template>
                                 </BreezeDropdown>
                             </div>
